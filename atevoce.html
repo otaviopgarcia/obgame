@@ -29,9 +29,16 @@
 
     #wrap {
       position: relative;
-      width: min(100vw, calc((100vh - 20px)*16/9));
+      width: min(100vw, calc((100svh - 20px)*16/9));
       aspect-ratio: 16/9;
       margin: 0 auto
+    }
+
+    @media (orientation: landscape) {
+      #wrap {
+        width: min(100vw, calc((100svh - env(safe-area-inset-bottom, 0px))*16/9));
+        max-height: 100svh
+      }
     }
 
     canvas {
@@ -110,29 +117,36 @@
     }
 
     .pad {
-      position: absolute;
-      bottom: 2%;
+      position: fixed;
+      bottom: max(12px, env(safe-area-inset-bottom, 12px));
       display: none;
-      gap: calc(var(--u)*1.5);
-      z-index: 5;
+      gap: clamp(6px, 1.2vw, 14px);
+      z-index: 20;
       touch-action: none
     }
 
     .pad.l {
-      left: 3%
+      left: max(12px, env(safe-area-inset-left, 12px))
     }
 
     .pad.r {
-      right: 3%
+      right: max(12px, env(safe-area-inset-right, 12px))
     }
 
+    body.touch .pad,
     .touch .pad {
       display: flex
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .pad {
+        display: flex
+      }
+    }
+
     .pad div {
-      width: calc(var(--u)*8);
-      height: calc(var(--u)*8);
+      width: clamp(44px, 8vmin, 72px);
+      height: clamp(44px, 8vmin, 72px);
       border-radius: 50%;
       background: rgba(255, 255, 255, .22);
       border: 2px solid rgba(255, 255, 255, .5);
@@ -208,7 +222,16 @@
     // touch
     const wrap = document.getElementById('wrap');
     function rs() { wrap.style.setProperty('--u', wrap.clientWidth / 100 + 'px') } rs(); addEventListener('resize', rs);
-    if (matchMedia('(pointer:coarse)').matches || 'ontouchstart' in window) wrap.classList.add('touch');
+    function updateTouchMode() {
+      const touch = matchMedia('(hover: none)').matches ||
+        matchMedia('(pointer: coarse)').matches ||
+        navigator.maxTouchPoints > 0 ||
+        'ontouchstart' in window;
+      wrap.classList.toggle('touch', touch);
+      document.body.classList.toggle('touch', touch);
+    }
+    updateTouchMode();
+    addEventListener('resize', updateTouchMode);
     const TK = { L: 'ArrowLeft', R: 'ArrowRight', J: 'ArrowUp', G: 'KeyK' };
     document.querySelectorAll('.pad div').forEach(b => {
       const k = b.dataset.k;

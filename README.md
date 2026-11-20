@@ -1,6 +1,6 @@
 # Ate Voce
 
-**Ate Voce** e um jogo de luta 2D para navegador. O jogador atravessa uma trilha, enfrenta ondas de zumbis e encontra o outro personagem no final do caminho.
+**Até Você** é um jogo de luta 2D para navegador. O jogador atravessa uma trilha, enfrenta ondas de zumbis e encontra o outro personagem no final do caminho.
 
 ## Como jogar
 
@@ -28,6 +28,8 @@ Ao chegar ao destino, aparece a cena final com os dois personagens se reencontra
 ### Dispositivos moveis
 
 Em telas de toque, botoes aparecem na parte inferior da tela:
+
+Os controles permanecem visiveis ao girar o celular para o modo paisagem e respeitam as areas seguras das laterais e da base.
 
 | Botao | Acao |
 |---|---|
