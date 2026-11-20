@@ -206,7 +206,7 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     function start() {
       other = sel == 'tavio' ? 'beckman' : 'tavio'; mir = sel == 'beckman'; dir = mir ? -1 : 1;
-      spawnX = 400; other_x = mir ? W - 3700 : 3700;
+      spawnX = mir ? W - 400 : 400; other_x = mir ? 150 : W - 150;
       me = { x: spawnX, y: GY, vy: 0, vx: 0, g: true, f: dir, hp: HP0, at: 0, n: 0, buf: 0, hit: null, hurt: 0, inv: 0, dt: 0, guard: 0 };
       zs = []; wave = null; waveI = 0; fx = []; st = 'play'; cut = 0; arr = 0; t = 0; banner = 0; camx = clamp(me.x - 400, 0, W - 800);
       document.getElementById('sel').classList.add('h'); document.getElementById('end').classList.add('h')
