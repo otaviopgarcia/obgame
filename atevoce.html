@@ -30,15 +30,15 @@
 
     #wrap {
       position: relative;
-      width: min(100vw, calc((100svh - 20px)*16/9));
-      aspect-ratio: 16/9;
+      width: 100vw;
+      height: 100svh;
       margin: 0 auto
     }
 
     @media (orientation: landscape) {
       #wrap {
-        width: min(100vw, calc((100svh - env(safe-area-inset-bottom, 0px))*16/9));
-        max-height: 100svh
+        width: 100vw;
+        height: 100svh
       }
     }
 
